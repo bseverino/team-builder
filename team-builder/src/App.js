@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 import data from './data.js';
+import { Container } from 'reactstrap'
 
-import Form from './components/Form';
+import MemberForm from './components/MemberForm';
 import Team from './components/Team';
 
 function App() {
@@ -19,10 +20,19 @@ function App() {
     setTeam([...team, newMember])
   }
 
+  const memberToEdit = member => {
+
+  };
+
   return (
     <div className="App">
-      <Form addNewMember={addNewMember} />
-      <Team team={team} />
+      <header>
+        <h1>Team Builder</h1>
+      </header>
+      <Container>
+        <MemberForm addNewMember={addNewMember} />
+        <Team team={team} />
+      </Container>
     </div>
   );
 }

@@ -1,0 +1,40 @@
+import React, { useState} from 'react';
+import { Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+
+const MemberForm = props => {
+    const [member, setMember] = useState({ name: '', email: '', role: '' });
+
+    const handleChanges = e => {
+        setMember({ ...member, [e.target.name]: e.target.value  });
+    };
+
+    const submitForm = e => {
+        e.preventDefault();
+        props.addNewMember(member);
+        setMember({ name: '', email: '', role: '' });
+    };
+
+    return (
+        <Row className="form-container">
+            <Col xs='8' md='6' lg='4' >
+                <Form className='member-form' onSubmit={submitForm}>
+                    <FormGroup>
+                        <Label htmlFor='name'>Name</Label>
+                        <Input className='input' id='name' type='text' name='name' value={member.name} onChange={handleChanges} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor='email'>Email</Label>
+                        <Input className='input' id='email' type='text' name='email' value={member.email} onChange={handleChanges} />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label htmlFor='role'>Role</Label>
+                        <Input className='input' id='role' type='text' name='role' value={member.role} onChange={handleChanges} />
+                    </FormGroup>
+                    <FormGroup className='button-container'><Button className='button form-button' type='submit'>Add Member</Button></FormGroup>
+                </Form>
+            </Col>
+        </Row>
+    );
+};
+
+export default MemberForm;
