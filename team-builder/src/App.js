@@ -8,6 +8,9 @@ import Team from './components/Team';
 
 function App() {
   const [team, setTeam] = useState(data);
+  const [memberToEdit, setMemberToEdit] = useState({ name: '', email: '', role: '' });
+
+  console.log(memberToEdit);
 
   const addNewMember = member => {
     const newMember = {
@@ -20,8 +23,8 @@ function App() {
     setTeam([...team, newMember])
   }
 
-  const memberToEdit = member => {
-
+  const editMember = member => {
+    setMemberToEdit(member);
   };
 
   return (
@@ -30,8 +33,8 @@ function App() {
         <h1>Team Builder</h1>
       </header>
       <Container>
-        <MemberForm addNewMember={addNewMember} />
-        <Team team={team} />
+        <MemberForm addNewMember={addNewMember} memberToEdit={memberToEdit} />
+        <Team team={team} editMember={editMember} />
       </Container>
     </div>
   );
