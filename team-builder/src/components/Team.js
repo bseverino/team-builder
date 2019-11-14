@@ -12,7 +12,7 @@ const Team = props => {
                             <CardText className="member-role">{member.role}</CardText>
                             <CardText className="member-email">{member.email}</CardText>
                             <div className='button-container'>
-                                <Button className="button member-button" onClick={() => props.editMember(member)}>Edit Member</Button>
+                                <Button className="button member-button" onClick={() => props.enterEditMode(member)}>Edit Member</Button>
                             </div>
                         </CardBody>
                     </Card>

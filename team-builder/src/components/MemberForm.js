@@ -1,8 +1,12 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 const MemberForm = props => {
     const [member, setMember] = useState({ name: '', email: '', role: '' });
+
+    useEffect(() => {
+        setMember(props.memberToEdit);
+    }, [props.memberToEdit]);
 
     const handleChanges = e => {
         setMember({ ...member, [e.target.name]: e.target.value  });
@@ -10,7 +14,11 @@ const MemberForm = props => {
 
     const submitForm = e => {
         e.preventDefault();
-        props.addNewMember(member);
+
+        if (props.memberToEdit.name === '') {            
+            props.addNewMember(member);
+        } else props.editMember(member);
+
         setMember({ name: '', email: '', role: '' });
     };
 
@@ -30,7 +38,7 @@ const MemberForm = props => {
                         <Label htmlFor='role'>Role</Label>
                         <Input className='input' id='role' type='text' name='role' value={member.role} onChange={handleChanges} />
                     </FormGroup>
-                    <FormGroup className='button-container'><Button className='button form-button' type='submit'>Add Member</Button></FormGroup>
+                    <FormGroup className='button-container'><Button className='button form-button' type='submit'>Submit</Button></FormGroup>
                 </Form>
             </Col>
         </Row>

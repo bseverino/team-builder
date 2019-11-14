@@ -23,8 +23,16 @@ function App() {
     setTeam([...team, newMember])
   }
 
-  const editMember = member => {
+  const enterEditMode = member => {
     setMemberToEdit(member);
+  };
+
+  const editMember = member => {
+    const newTeam = [...team];
+    const index = newTeam.findIndex(m => m.id === member.id)
+    newTeam[index] = member;
+    setTeam(newTeam);
+    setMemberToEdit({ name: '', email: '', role: '' });
   };
 
   return (
@@ -33,8 +41,8 @@ function App() {
         <h1>Team Builder</h1>
       </header>
       <Container>
-        <MemberForm addNewMember={addNewMember} memberToEdit={memberToEdit} />
-        <Team team={team} editMember={editMember} />
+        <MemberForm addNewMember={addNewMember} memberToEdit={memberToEdit} editMember={editMember} />
+        <Team team={team} enterEditMode={enterEditMode} />
       </Container>
     </div>
   );
